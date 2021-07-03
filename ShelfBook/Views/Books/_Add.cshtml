@@ -1,0 +1,87 @@
+﻿@model ShelfBook.Dtos.BookDto
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Edytuj</h5>
+    </div>
+    <div class="modal-body" id="myModalBodyDiv1">
+        <div class="card mb-3" style="border: none">
+            <div class="card-body">
+            </div>
+            @using (Html.BeginForm("AddNewBook", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <table>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Tytuł:</th>
+                            <th scope="row">
+                                <input class="form-control" name="title" id="inputTitle" type="text" value="">
+                            </th>
+                        </tr>
+                        <tr style="position:center; height: 250px" id="pictureRow">
+                            <th scope="row" colspan="2">
+                                <center>
+                                    <img id="outputImage" src="" height="250" alt="Tu będzie zdjęcie które wstawisz" />
+                                </center>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Ustaw Zdjęcie:
+                            </th>
+                            <th>
+                                <input type="file" name="image" id="file" accept="image/*" onchange="loadFile(event)" />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Gatunek:</th>
+                            <th scope="row"><input class="form-control" name="genre" id="inputGenre" type="text" value=""></th>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="2"><h3>Autor</h3></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Imię:</th>
+                            <th scope="row"><input class="form-control" name="authorFirstName" id="inputAutor" type="text" value=""></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Drugie imię:</th>
+                            <th scope="row"><input class="form-control" name="authorSecondName" id="inputAutor" type="text" value=""></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Nazwisko:</th>
+                            <th scope="row"><input class="form-control" name="authorSurname" id="inputAutor" type="text" value=""></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Pseudonim Artystyczny:</th>
+                            <th scope="row"><input class="form-control" name="authorFullName" id="inputAutor" type="text" value=""></th>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="2"><h3>Isbn</h3></th>
+                        </tr>
+                        <tr>
+                            <th scope="row"><input class="form-control" name="iSBN" id="inputIsbn" type="text" value=""></th>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="2"><h3>Wydawca</h3></th>
+                        </tr>
+                        <tr>
+                            <th scope="row"><input class="form-control" name="publishingHouse" id="inputPublishingHouseName" type="text" value=""></th>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="2"><h3>Cena</h3></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Stara:</th>
+                            <th scope="row"><input class="form-control" name="normalPrice" id="inputNormalPrice" type="text" value=""></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Nowa:</th>
+                            <th scope="row"><input class="form-control" name="promotialPrice" id="inputPromotionalPrice" type="text" value=""></th>
+                        </tr>
+                    </tbody>
+                </table>
+                <input type="submit" class="btn btn-primary" value="Zapisz zmiany" id="sub" />
+            }
+        </div>
+    </div>
+</div>

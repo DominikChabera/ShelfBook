@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ShelfBook.Dtos.BookDto>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top: 25px;">
+    <div class="row">
+        @foreach (var item in @Model)
+        {
+            <div class="col-lg-4">
+                <div class="bs-component">
+                    @Html.Partial("Product", @item)
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<a id="scroll-to-top" class="scroll-top rounded-circle bg-primary position-fixed text-center active" style="position: fixed; bottom:10px; right: 10px" onclick="addNewBookModal()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+    </svg>
+</a>
+<div id="myModal" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function sendModel(model) {
+        $mymodal = $("#myModal");
+        $.ajax({
+            url: '@Url.Action("EditBook", "Books")',
+            type: "GET",
+            dataType: "html",
+            data: { Id: model },
+            cache: false,
+            success: function (res) {
+                //Fill div with results
+                $mymodal.find("div.modal-content").html(res);
+                $mymodal.modal("show");
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    }
+    function addNewBookModal(model) {
+        $mymodal = $("#myModal");
+        $.ajax({
+            url: '@Url.Action("AddNewBookView", "Books")',
+            type: "GET",
+            dataType: "html",
+            cache: false,
+            success: function (res) {
+                //Fill div with results
+                $mymodal.find("div.modal-content").html(res);
+                $mymodal.modal("show");
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    }
+    function deleteModel(e) {
+        $.ajax({
+            url: '@Url.Action("DeleteBook", "Books")',
+            type: "DELETE",
+            dataType: "html",
+            data: { Id: e },
+            cache: false,
+            success: function (res) {
+                //Fill div with results
+                alert("Rekord usunięty");
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    }
+    var loadFile = function (event) {
+        var output = document.getElementById('outputImage');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+</script>

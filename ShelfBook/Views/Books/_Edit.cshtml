@@ -1,0 +1,66 @@
+﻿@model ShelfBook.Dtos.BookDto
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Edytuj</h5>
+    </div>
+    <div class="modal-body" id="myModalBodyDiv1">
+        <div class="card mb-3" style="border: none">
+            @Html.HiddenFor(i => i.Id)
+            <div class="card-body">
+            </div>
+            @using (Html.BeginForm("UpdateBook", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HttpMethodOverride(HttpVerbs.Put)
+                <table>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Tytuł:</th>
+                            <th scope="row"><input class="form-control" name="title" id="inputTitle" type="text" value="@Model.Title"></th>
+                        </tr>
+                        @Html.HiddenFor(i => i.Id)
+                        <tr style="position:center" id="pictureRow">
+                            <th scope="row" colspan="2">
+                                <center>
+                                    <img id="outputImage" src="@Url.Content(@Model.Image.ImagePath)" height="250" />
+                                </center>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Zmień Zdjęcie:
+                            </th>
+                            <th>
+                                <input type="file" name="image" id="file" accept="image/*" onchange="loadFile(event)" />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Gatunek:</th>
+                            <th scope="row"><input class="form-control" name="genre" id="inputGenre" type="text" value="@Model.Genre.Name"></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Autor:</th>
+                            <th scope="row"><input class="form-control" name="authorFullName" id="inputAutor" type="text" value="@Model.Author.ViewFullName"></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">ISBN:</th>
+                            <th scope="row"><input class="form-control" name="iSBN" id="inputIsbn" type="text" value="@Model.ISBN"></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Wydawca:</th>
+                            <th scope="row"><input class="form-control" name="publishingHouse" id="inputPublishingHouseName" type="text" value="@Model.PublishingHouse.Name"></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Stara Cena:</th>
+                            <th scope="row"><input class="form-control" name="normalPrice" id="inputNormalPrice" type="text" value="@Model.Price.NormalPrice"></th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Cena:</th>
+                            <th scope="row"><input class="form-control" name="promotialPrice" id="inputPromotionalPrice" type="text" value="@Model.Price.PromotionalPrice"></th>
+                        </tr>
+                    </tbody>
+                </table>
+                <input type="submit" class="btn btn-primary" value="Zapisz zmiany" id="sub" />
+            }
+        </div>
+    </div>
+</div>

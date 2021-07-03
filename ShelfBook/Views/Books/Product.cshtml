@@ -1,0 +1,27 @@
+﻿@model ShelfBook.Dtos.BookDto
+
+<div class="card mb-3" style="height: 500px">
+    <h3 class="card-header" style="height: 83px; text-align: center" id="header">@Html.DisplayTextFor(m => m.Title)</h3>
+    <div class="card-body">
+        <center>
+            <img src="@Url.Content(@Model.Image.ImagePath)" height="100" />
+        </center>
+    </div>
+    <ul class="list-group list-group-flush" id="form">
+        <li class="list-group-item" id="autor">Gatunek: @Html.DisplayTextFor(m => m.Genre.Name)</li>
+        <li class="list-group-item" id="autor">Autor: @Html.DisplayTextFor(m => m.Author.ViewFullName)</li>
+        <li class="list-group-item" id="isbn">ISBN: @Html.DisplayTextFor(m => m.ISBN)</li>
+        <li class="list-group-item text-danger" id="normalPrice">Stara Cena: @Html.DisplayTextFor(m => m.Price.NormalPrice) zł</li>
+        <li class="list-group-item text-success" id="promotialPrice">Cena: @Html.DisplayTextFor(m => m.Price.PromotionalPrice) zł</li>
+    </ul>
+    <div class="card-body">
+        <table>
+            <tr>
+                <th><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="sendModel(@Model.Id)">Edytuj</button></th>
+                <th><button type="button" id="delete-btn" class="btn btn-danger" onclick="deleteModel(@Model.Id)">Usuń</button></th>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
